@@ -6,9 +6,11 @@
 
 **Cesium Material Pack**: A plugin with procedurally-shaded materials such as bricks, wood, and noise patterns.
 
+<p align="center">
 <img src="Documentation/Images/BrickCircle.png" width="200" height="92" alt="Brick" />
 <img src="Documentation/Images/WoodCircle.png" width="200" height="92" alt="Wood" />
 <img src="Documentation/Images/FacetCircle.png" width="200" height="92" alt="Facet" />
+</p>
 
 **Cesium version**: Tested against [b24](http://cesiumjs.org/downloads.html).  Most likely works with older and newer versions.  Post a message to the [Cesium forum](http://cesiumjs.org/forum.html) if you have compatibility issues.
 

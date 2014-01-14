@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium Materials - https://github.com/AnalyticalGraphicsInc/cesium-materials-pack
  *
- * Copyright 2011-2014 Cesium Contributors
+ * Copyright 2011-2014 Analytical Graphics Inc. and Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Columbus View (Pat. Pend.)
- *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/AnalyticalGraphicsInc/cesium-materials-pack/blob/master/LICENSE.md for full licensing details.
  */

@@ -3,3 +3,5 @@
 /Source/Shaders/*.js
 /Source/Shaders/*/*.js
 /Source/Shaders/*/*/*.js
+
+/Build/minifyShaders.state

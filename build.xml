@@ -53,10 +53,15 @@
 		<pathelement path="${toolsDirectory}/commons-logging-1.1.1/commons-logging-1.1.1.jar" />
 	</path>
 
-	<fileset dir="${sourceDirectory}" id="cesiumJsFiles">
-		<include name="**/*.js" />
-		<exclude name="*.js" />
-	</fileset>
+	<union id="cesiumJsFiles">
+		<fileset dir="${sourceDirectory}">
+			<include name="**/*.js" />
+			<exclude name="*.js" />
+		</fileset>
+		<fileset dir="${sourceDirectory}">
+			<include name="addMaterialPack.js" />
+		</fileset>
+	</union>
 
 	<scriptdef name="glslToJavascript" language="javascript" src="${tasksDirectory}/glslToJavaScript.js" manager="bsf" classpathref="javascriptClassPath" loaderref="javascript.loader">
 		<attribute name="minify" />
@@ -109,7 +114,7 @@
 		<mkdir dir="${combineOutputDirectory}" />
 		<property name="relativeCombineOutputDirectory" location="${combineOutputDirectory}" relative="true" basedir="${sourceDirectory}" />
 
-		<!-- create combined Cesium.js	-->
+		<!-- create combined CesiumMaterials.js	-->
 		<antcall target="combineJavaScript.combineCesium" />
 
 		<!-- copy to build folder with copyright header added at the top -->
@@ -143,12 +148,12 @@
 			<arg value="skipModuleInsertion=true" />
 			<arg value="name=${relativeAlmondPath}" />
 			<arg value="include=main" />
-			<arg value="out=${relativeCombineOutputDirectory}/Cesium.js" />
+			<arg value="out=${relativeCombineOutputDirectory}/CesiumMaterials.js" />
 		</exec>
 	</target>
 
 	<target name="combineJavaScript.combineCesium.check">
-		<uptodate property="no.combineCesium.create" targetfile="${outputDirectory}/Cesium.js">
+		<uptodate property="no.combineCesium.create" targetfile="${outputDirectory}/CesiumMaterials.js">
 			<srcfiles refid="cesiumJsFiles" />
 		</uptodate>
 	</target>

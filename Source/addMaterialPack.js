@@ -8,7 +8,8 @@ define([
         './Shaders/FacetMaterial',
         './Shaders/GrassMaterial',
         './Shaders/TieDyeMaterial',
-        './Shaders/WoodMaterial'
+        './Shaders/WoodMaterial',
+        './Shaders/Builtin/CzmBuiltins'
     ], function(
         AsphaltMaterial,
         BlobMaterial,
@@ -18,16 +19,23 @@ define([
         FacetMaterial,
         GrassMaterial,
         TieDyeMaterial,
-        WoodMaterial) {
+        WoodMaterial,
+        CzmBuiltins) {
 	"use strict";
 	
-	function addMaterialPack(Material) {
-	    Material.AsphaltType = 'Asphalt';
-	    Material._materialCache.addMaterial(Material.AsphaltType, {
+	function addMaterialPack(Cesium) {
+		for ( var builtinName in CzmBuiltins) {
+	        if (CzmBuiltins.hasOwnProperty(builtinName)) {
+	            Cesium.ShaderProgram._czmBuiltinsAndUniforms[builtinName] = CzmBuiltins[builtinName];
+	        }
+	    }
+		
+		Cesium.Material.AsphaltType = 'Asphalt';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.AsphaltType, {
 	        fabric : {
-	            type : Material.AsphaltType,
+	            type : Cesium.Material.AsphaltType,
 	            uniforms : {
-	                asphaltColor : new Color(0.15, 0.15, 0.15, 1.0),
+	                asphaltColor : new Cesium.Color(0.15, 0.15, 0.15, 1.0),
 	                bumpSize : 0.02,
 	                roughness : 0.2
 	            },
@@ -38,13 +46,13 @@ define([
 	        }
 	    });
 	
-	    Material.BlobType = 'Blob';
-	    Material._materialCache.addMaterial(Material.BlobType, {
+		Cesium.Material.BlobType = 'Blob';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.BlobType, {
 	        fabric : {
-	            type : Material.BlobType,
+	            type : Cesium.Material.BlobType,
 	            uniforms : {
-	                lightColor : new Color(1.0, 1.0, 1.0, 0.5),
-	                darkColor : new Color(0.0, 0.0, 1.0, 0.5),
+	                lightColor : new Cesium.Color(1.0, 1.0, 1.0, 0.5),
+	                darkColor : new Cesium.Color(0.0, 0.0, 1.0, 0.5),
 	                frequency : 10.0
 	            },
 	            source : BlobMaterial
@@ -55,15 +63,15 @@ define([
 	        }
 	    });
 	    
-		Material.BrickType = 'Brick';
-	    Material._materialCache.addMaterial(Material.BrickType, {
+		Cesium.Material.BrickType = 'Brick';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.BrickType, {
 	        fabric : {
-	            type : Material.BrickType,
+	            type : Cesium.Material.BrickType,
 	            uniforms : {
-	                brickColor : new Color(0.6, 0.3, 0.1, 1.0),
-	                mortarColor : new Color(0.8, 0.8, 0.7, 1.0),
-	                brickSize : new Cartesian2(0.3, 0.15),
-	                brickPct : new Cartesian2(0.9, 0.85),
+	                brickColor : new Cesium.Color(0.6, 0.3, 0.1, 1.0),
+	                mortarColor : new Cesium.Color(0.8, 0.8, 0.7, 1.0),
+	                brickSize : new Cesium.Cartesian2(0.3, 0.15),
+	                brickPct : new Cesium.Cartesian2(0.9, 0.85),
 	                brickRoughness : 0.2,
 	                mortarRoughness : 0.1
 	            },
@@ -75,12 +83,12 @@ define([
 	        }
 	    });
 	
-	    Material.CementType = 'Cement';
-	    Material._materialCache.addMaterial(Material.CementType, {
+		Cesium.Material.CementType = 'Cement';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.CementType, {
 	        fabric : {
-	            type : Material.CementType,
+	            type : Cesium.Material.CementType,
 	            uniforms : {
-	                cementColor : new Color(0.95, 0.95, 0.85, 1.0),
+	                cementColor : new Cesium.Color(0.95, 0.95, 0.85, 1.0),
 	                grainScale : 0.01,
 	                roughness : 0.3
 	            },
@@ -91,12 +99,12 @@ define([
 	        }
 	    });
 
-	    Material.ErosionType = 'Erosion';
-	    Material._materialCache.addMaterial(Material.ErosionType, {
+		Cesium.Material.ErosionType = 'Erosion';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.ErosionType, {
 	        fabric : {
-	            type : Material.ErosionType,
+	            type : Cesium.Material.ErosionType,
 	            uniforms : {
-	                color : new Color(1.0, 0.0, 0.0, 0.5),
+	                color : new Cesium.Color(1.0, 0.0, 0.0, 0.5),
 	                time : 1.0
 	            },
 	            source : ErosionMaterial
@@ -106,13 +114,13 @@ define([
 	        }
 	    });
 	
-	    Material.FacetType = 'Facet';
-	    Material._materialCache.addMaterial(Material.FacetType, {
+		Cesium.Material.FacetType = 'Facet';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.FacetType, {
 	        fabric : {
-	            type : Material.FacetType,
+	            type : Cesium.Material.FacetType,
 	            uniforms : {
-	                lightColor : new Color(0.25, 0.25, 0.25, 0.75),
-	                darkColor : new Color(0.75, 0.75, 0.75, 0.75),
+	                lightColor : new Cesium.Color(0.25, 0.25, 0.25, 0.75),
+	                darkColor : new Cesium.Color(0.75, 0.75, 0.75, 0.75),
 	                frequency : 10.0
 	            },
 	            source : FacetMaterial
@@ -123,13 +131,13 @@ define([
 	        }
 	    });
 	    
-	    Material.GrassType = 'Grass';
-	    Material._materialCache.addMaterial(Material.GrassType, {
+		Cesium.Material.GrassType = 'Grass';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.GrassType, {
 	        fabric : {
-	            type : Material.GrassType,
+	            type : Cesium.Material.GrassType,
 	            uniforms : {
-	                grassColor : new Color(0.25, 0.4, 0.1, 1.0),
-	                dirtColor : new Color(0.1, 0.1, 0.1, 1.0),
+	                grassColor : new Cesium.Color(0.25, 0.4, 0.1, 1.0),
+	                dirtColor : new Cesium.Color(0.1, 0.1, 0.1, 1.0),
 	                patchiness : 1.5
 	            },
 	            source : GrassMaterial
@@ -140,13 +148,13 @@ define([
 	        }
 	    });
 	    
-	    Material.TyeDyeType = 'TieDye';
-	    Material._materialCache.addMaterial(Material.TyeDyeType, {
+		Cesium.Material.TyeDyeType = 'TieDye';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.TyeDyeType, {
 	        fabric : {
-	            type : Material.TyeDyeType,
+	            type : Cesium.Material.TyeDyeType,
 	            uniforms : {
-	                lightColor : new Color(1.0, 1.0, 0.0, 0.75),
-	                darkColor : new Color(1.0, 0.0, 0.0, 0.75),
+	                lightColor : new Cesium.Color(1.0, 1.0, 0.0, 0.75),
+	                darkColor : new Cesium.Color(1.0, 0.0, 0.0, 0.75),
 	                frequency : 5.0
 	            },
 	            source : TieDyeMaterial
@@ -157,15 +165,15 @@ define([
 	        }
 	    });
 	
-	    Material.WoodType = 'Wood';
-	    Material._materialCache.addMaterial(Material.WoodType, {
+		Cesium.Material.WoodType = 'Wood';
+		Cesium.Material._materialCache.addMaterial(Cesium.Material.WoodType, {
 	        fabric : {
-	            type : Material.WoodType,
+	            type : Cesium.Material.WoodType,
 	            uniforms : {
-	                lightWoodColor : new Color(0.6, 0.3, 0.1, 1.0),
-	                darkWoodColor : new Color(0.4, 0.2, 0.07, 1.0),
+	                lightWoodColor : new Cesium.Color(0.6, 0.3, 0.1, 1.0),
+	                darkWoodColor : new Cesium.Color(0.4, 0.2, 0.07, 1.0),
 	                ringFrequency : 3.0,
-	                noiseScale : new Cartesian2(0.7, 0.5),
+	                noiseScale : new Cesium.Cartesian2(0.7, 0.5),
 	                grainFrequency : 27.0
 	            },
 	            source : WoodMaterial

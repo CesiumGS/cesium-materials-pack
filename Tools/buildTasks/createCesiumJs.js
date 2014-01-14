@@ -28,7 +28,7 @@ forEachFile('sourcefiles', function(relativePath, file) {
 
     moduleIds.push("'./" + moduleId + "'");
     parameters.push(parameterName);
-    assignments.push('Cesium' + assignmentName + ' = ' + parameterName + ';');
+    assignments.push('CesiumMaterials' + assignmentName + ' = ' + parameterName + ';');
 });
 
 var contents = '\
@@ -36,11 +36,11 @@ var contents = '\
 define([' + moduleIds.join(', ') + '], function(' + parameters.join(', ') + ') {\n\
   "use strict";\n\
   /*jshint sub:true*/\n\
-  var Cesium = {\n\
+  var CesiumMaterials = {\n\
     _shaders : {}\n\
   };\n\
   ' + assignments.join('\n  ') + '\n\
-  return Cesium;\n\
+  return CesiumMaterials;\n\
 });';
 
 writeFileContents(attributes.get('output'), contents);

@@ -38,6 +38,18 @@ Specify the target(s) at the command line:
 
 **Usage**
 
+To use the plugin, load the built script and call `addMaterialPack` with the the global `Cesium` object as the argument.
+
+```
+<script type="text/javascript" src="path/to/Cesium.js" />
+<script type="text/javascript" src="path/to/CesiumMaterials.js" />
+<script type="text/javascript">
+// ...
+CesiumMaterials.addMaterialsPack(Cesium);
+// Use the materials in the plugion as you would use the materials built-in to Cesium ...
+</script>
+```
+
 For how to use Cesium materials, see the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).
 
 Material uniforms:

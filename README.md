@@ -45,7 +45,7 @@ To use the plugin, load the built script and call `addMaterialPack` with the the
 <script type="text/javascript" src="path/to/CesiumMaterials.js" />
 <script type="text/javascript">
 // ...
-CesiumMaterials.addMaterialsPack(Cesium);
+CesiumMaterials.addMaterialPack(Cesium);
 // Use the materials in the plugion as you would use the materials built-in to Cesium ...
 </script>
 ```

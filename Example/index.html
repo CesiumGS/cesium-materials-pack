@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Cesium Materials Demo</title>
+<link rel="stylesheet" href="http://cesiumjs.org/releases/b24/Widgets/widgets.css">
+<link rel="stylesheet" href="example.css">
+<script type="text/javascript" src="http://cesiumjs.org/releases/b24/Cesium.js"></script>
+<script type="text/javascript" src="../Build/CesiumMaterialsUnminified/CesiumMaterials.js"></script>
+</head>
+<body>
+<div id="cesiumContainer" class="fullWindow"></div>
+<div id="toolbar"></div>
+<script type="text/javascript">
+"use strict";
+
+CesiumMaterials.addMaterialPack(Cesium);
+
+var extent;
+
+function addToolbarMenu(options, onchange, toolbarID) {
+    var menu = document.createElement('select');
+    menu.onchange = onchange;
+    document.getElementById(toolbarID || 'toolbar').appendChild(menu);
+
+    for (var i = 0, len = options.length; i < len; ++i) {
+        var option = document.createElement('option');
+        option.textContent = options[i].text;
+        option.value = options[i].value;
+        menu.appendChild(option);
+    }
+}
+
+function createButtons(widget) {
+    var scene = widget.scene;
+    var primitives = scene.getPrimitives();
+
+    function selectMenuOption(menu, options) {
+        if (menu.selectedIndex > 0) {
+            options[menu.selectedIndex].onselect();
+        }
+        menu.selectedIndex = 0;
+    }
+
+    var proceduralTextureOptions = [{
+        text : 'Procedural textures'
+    }, {
+        text : 'Asphalt',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Asphalt');
+        }
+    }, {
+        text : 'Blob',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Blob');
+        }
+    }, {
+        text : 'Brick',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Brick');
+        }
+    }, {
+        text : 'Cement',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Cement');
+        }
+    }, {
+        text : 'Facet',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Facet');
+        }
+    }, {
+        text : 'Grass',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Grass');
+        }
+    }, {
+        text : 'TieDye',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('TieDye');
+        }
+    }, {
+        text : 'Wood',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Wood');
+        }
+    }];
+
+    addToolbarMenu(proceduralTextureOptions, function() {
+        selectMenuOption(this, proceduralTextureOptions);
+    });
+    
+    var miscMaterialOptions = [{
+        text : 'Misc materials'
+    }, {
+        text : 'Erosion',
+        onselect : function() {
+        	extent.material = Cesium.Material.fromType('Erosion');
+	        scene.getAnimations().addProperty(extent.material.uniforms, 'time', 0.0, 1.0, {
+	            duration : 1500
+	        });
+        }
+    }];
+
+    addToolbarMenu(miscMaterialOptions, function() {
+        selectMenuOption(this, miscMaterialOptions);
+    });
+}
+
+function createPrimitives(widget) {
+    var scene = widget.scene;
+    var primitives = scene.getPrimitives();
+
+    extent = new Cesium.ExtentPrimitive({
+        extent : new Cesium.Extent(
+                         Cesium.Math.toRadians(-120.0),
+                         Cesium.Math.toRadians(20.0),
+                         Cesium.Math.toRadians(-60.0),
+                         Cesium.Math.toRadians(40.0))
+    });
+    primitives.add(extent);
+}
+
+var widget = new Cesium.CesiumWidget('cesiumContainer');
+
+createPrimitives(widget);
+createButtons(widget);
+
+</script>
+</body>
+</html>

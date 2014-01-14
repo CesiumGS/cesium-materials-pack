@@ -22,8 +22,21 @@
 
 **License**: Apache 2.0.  Free for commercial and non-commercial use.  See [LICENSE.md](LICENSE.md).
 
-TODO: install
-TODO: usage
+**Build**
+
+The following targets can be built:
+   * `build` - A fast, developer-oriented build that prepares the source tree for use as standard [Asynchronous Module Definition (AMD)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules.
+   * `combine` - Runs `build`, plus uses [NodeJS](http://nodejs.org/) to run [the RequireJS optimizer](http://requirejs.org/docs/optimization.html) to combine Cesium materials and [the Almond AMD loader](http://requirejs.org/docs/faq-optimization.html#wrap) to produce an all-in-one file in the `Build/CesiumMaterials` directory.
+   * `minify` - Runs `combine`, plus [minifies](http://en.wikipedia.org/wiki/Minification_(programming\)) CesiumMaterials.js using [UglifyJS2](https://github.com/mishoo/UglifyJS2) for a smaller deployable file.
+   * `clean` - Removes all generated build artifacts.
+
+Specify the target(s) at the command line:
+
+<pre>
+./Tools/apache-ant-1.8.2/bin/ant [target-name] [another-target-name] ...
+</pre>
+
+**Usage**
 
 For how to use Cesium materials, see the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).
 

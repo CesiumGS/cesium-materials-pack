@@ -1,0 +1,186 @@
+<project name="Cesium Materials" default="combine">
+	<target name="build" description="A developer build that prepares the source tree for use as standard AMD modules.">
+		<mkdir dir="${buildDirectory}" />
+		<glslToJavascript minify="${build.minification}" minifystatefile="${buildDirectory}/minifyShaders.state">
+			<glslfiles dir="${shadersDirectory}" includes="**/*.glsl" />
+			<existingjsfiles dir="${shadersDirectory}" includes="**/*.js" excludes="*.profile.js" />
+		</glslToJavascript>
+
+		<createCesiumJs output="${sourceDirectory}/CesiumMaterials.js">
+			<sourcefiles refid="cesiumJsFiles" />
+		</createCesiumJs>
+	</target>
+
+	<target name="combine" depends="build,combineJavaScript" description="Combines all source files into a single stand-alone script." />
+
+	<target name="minify" description="Combines all source files into a single stand-alone, minified script.">
+		<antcall target="combine">
+			<param name="build.minification" value="true" />
+		</antcall>
+	</target>
+
+	<target name="clean" description="Removes all generated build artifacts.">
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${sourceDirectory}" includes="CesiumMaterials.js" />
+			<fileset dir="${buildDirectory}" defaultexcludes="false" />
+			<fileset dir="${shadersDirectory}" includes="**/*.js" excludes="*.profile.js" />
+		</delete>
+	</target>
+
+	<!-- properties controlling which steps get run -->
+	<property name="build.minification" value="false" />
+
+	<!-- Inputs -->
+	<property name="sourceDirectory" location="Source" />
+	<property name="shadersDirectory" location="${sourceDirectory}/Shaders" />
+	<property name="toolsDirectory" location="Tools" />
+	<property name="tasksDirectory" location="${toolsDirectory}/buildTasks" />
+	<property name="thirdPartyDirectory" location="ThirdParty" />
+	<property name="requirejsPath" location="${thirdPartyDirectory}/requirejs-2.1.9" />
+	<property name="rjsPath" location="${requirejsPath}/r.js" />
+	<property name="rjsOptions" location="${toolsDirectory}/build.js" />
+	<property name="almondPath" location="${thirdPartyDirectory}/almond-0.2.6/almond.js" />
+	<property name="rhinoJarPath" location="${toolsDirectory}/rhino-1.7R4/js.jar" />
+
+	<!-- Outputs -->
+	<property name="buildDirectory" location="Build" />
+	<property name="buildOutputDirectory" location="${buildDirectory}/CesiumMaterials" />
+	<property name="unminifiedOutputDirectory" location="${buildDirectory}/CesiumMaterialsUnminified" />
+
+	<path id="javascriptClassPath">
+		<pathelement path="${rhinoJarPath}" />
+		<pathelement path="${toolsDirectory}/bsf-2.4.0/bsf.jar" />
+		<pathelement path="${toolsDirectory}/commons-logging-1.1.1/commons-logging-1.1.1.jar" />
+	</path>
+
+	<fileset dir="${sourceDirectory}" id="cesiumJsFiles">
+		<include name="**/*.js" />
+		<exclude name="*.js" />
+	</fileset>
+
+	<scriptdef name="glslToJavascript" language="javascript" src="${tasksDirectory}/glslToJavaScript.js" manager="bsf" classpathref="javascriptClassPath" loaderref="javascript.loader">
+		<attribute name="minify" />
+		<attribute name="minifystatefile" />
+		<element name="glslfiles" type="fileset" />
+		<element name="existingjsfiles" type="fileset" />
+	</scriptdef>
+
+	<scriptdef name="extractShaderComments" language="javascript" src="${tasksDirectory}/extractShaderComments.js" manager="bsf" classpathref="javascriptClassPath" loaderref="javascript.loader">
+		<attribute name="output" />
+		<element name="glslfiles" type="fileset" />
+	</scriptdef>
+
+	<scriptdef name="createCesiumJs" language="javascript" src="${tasksDirectory}/createCesiumJs.js" manager="bsf" classpathref="javascriptClassPath" loaderref="javascript.loader">
+		<attribute name="output" />
+		<element name="sourcefiles" type="resources" />
+	</scriptdef>
+
+	<target name="setNodePathValue">
+		<condition property="nodePathValue" value="${toolsDirectory}/nodejs-0.6.17/windows/node.exe">
+			<os family="windows" />
+		</condition>
+
+		<condition property="nodePathValue" value="${toolsDirectory}/nodejs-0.6.17/mac/node">
+			<os family="mac" />
+		</condition>
+
+		<condition property="nodePathValue" value="${toolsDirectory}/nodejs-0.6.17/linux/node">
+			<os family="unix" />
+		</condition>
+	</target>
+
+	<target name="setNodePathLocation" if="nodePathValue">
+		<property name="nodePath" location="${nodePathValue}" />
+	</target>
+
+	<target name="setNodePath" depends="setNodePathValue,setNodePathLocation">
+		<condition property="nodePath" value="node">
+			<not>
+				<isset property="nodePath" />
+			</not>
+		</condition>
+	</target>
+
+	<target name="combineJavaScript.create">
+		<!-- create relative paths because r.js can't handle full Windows paths -->
+		<property name="relativeAlmondPath" location="${almondPath}" relative="true" basedir="${sourceDirectory}" />
+		<property name="combineOutputDirectory" location="${buildDirectory}/combineOutput" />
+
+		<mkdir dir="${combineOutputDirectory}" />
+		<property name="relativeCombineOutputDirectory" location="${combineOutputDirectory}" relative="true" basedir="${sourceDirectory}" />
+
+		<!-- create combined Cesium.js	-->
+		<antcall target="combineJavaScript.combineCesium" />
+
+		<!-- copy to build folder with copyright header added at the top -->
+		<copy todir="${outputDirectory}">
+			<fileset dir="${combineOutputDirectory}" />
+			<filterchain>
+				<concatfilter prepend="${sourceDirectory}/copyrightHeader.js" />
+			</filterchain>
+		</copy>
+
+		<delete dir="${combineOutputDirectory}" />
+
+		<!-- copy other resources -->
+		<copy todir="${outputDirectory}" includeEmptyDirs="false">
+			<fileset dir="${sourceDirectory}">
+				<exclude name="**/*.js" />
+				<exclude name="**/*.glsl" />
+				<exclude name="**/.gitignore" />
+				<exclude name="**/package.json" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="combineJavaScript.combineCesium" depends="combineJavaScript.combineCesium.check" unless="no.combineCesium.create">
+		<exec executable="${nodePath}" dir="${sourceDirectory}">
+			<arg value="${rjsPath}" />
+			<arg value="-o" />
+			<arg value="${rjsOptions}" />
+			<arg value="optimize=${optimize}" />
+			<arg value="baseUrl=." />
+			<arg value="skipModuleInsertion=true" />
+			<arg value="name=${relativeAlmondPath}" />
+			<arg value="include=main" />
+			<arg value="out=${relativeCombineOutputDirectory}/Cesium.js" />
+		</exec>
+	</target>
+
+	<target name="combineJavaScript.combineCesium.check">
+		<uptodate property="no.combineCesium.create" targetfile="${outputDirectory}/Cesium.js">
+			<srcfiles refid="cesiumJsFiles" />
+		</uptodate>
+	</target>
+
+	<target name="combineJavaScript.createUnminified">
+		<antcall target="combineJavaScript.create">
+			<param name="optimize" value="none" />
+			<param name="outputDirectory" value="${unminifiedOutputDirectory}" />
+		</antcall>
+	</target>
+
+	<target name="combineJavascript.checkCopy">
+		<condition property="combineJavascript.noCopy">
+			<or>
+				<istrue value="${build.minification}" />
+				<isset property="build.debugUnminified" />
+			</or>
+		</condition>
+	</target>
+
+	<target name="combineJavaScript.copyUnminified" depends="combineJavascript.checkCopy" unless="${combineJavascript.noCopy}">
+		<copy todir="${buildOutputDirectory}">
+			<fileset dir="${unminifiedOutputDirectory}" />
+		</copy>
+	</target>
+
+	<target name="combineJavaScript.createMinified" if="${build.minification}">
+		<antcall target="combineJavaScript.create">
+			<param name="optimize" value="uglify2" />
+			<param name="outputDirectory" value="${buildOutputDirectory}" />
+		</antcall>
+	</target>
+
+	<target name="combineJavaScript" depends="setNodePath,combineJavaScript.createUnminified,combineJavaScript.copyUnminified,combineJavaScript.createMinified" />
+</project>

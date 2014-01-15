@@ -90,7 +90,7 @@
         material : Cesium.Material.fromType('Wood')
     }));
     
-    primitives.add(new Cesium.ExtentPrimitive({
+    var extent = primitives.add(new Cesium.ExtentPrimitive({
         extent : new Cesium.Extent(
                     Cesium.Math.toRadians(-80.0),
                     Cesium.Math.toRadians(10.0),
@@ -98,9 +98,8 @@
                     Cesium.Math.toRadians(20.0)),
         material : Cesium.Material.fromType('Erosion')
     }));
-    
     scene.getAnimations().addProperty(extent.material.uniforms, 'time', 0.0, 1.0, {
-        duration : 1500
+        duration : 6000
     });
 </script>
 </body>

@@ -28,7 +28,7 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 
 Prebuilt minified and unminified versions of the plugin are in the [Build](Build/) directory.  Include the `.js` file using a `script` tag and call `initializeMaterialPack` with the the global `Cesium` object as the argument.
 
-```
+```html
 <script type="text/javascript" src="path/to/Cesium.js" />
 <script type="text/javascript" src="path/to/CesiumMaterials.js" />
 <script type="text/javascript">
@@ -46,24 +46,37 @@ primitives.add(new Cesium.ExtentPrimitive({
 }));
 </script>
 ```
-
-For how to use Cesium materials, see the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).
+Uniforms are used to change material properties.  For example:
+```javascript
+extent.material = new Cesium.Material({
+  fabric : {
+    type : 'Wood',
+    uniforms : {
+      lightWoodColor : new Cesium.Color( 0.7, 0.4, 0.1, 1.0),
+      darkWoodColor : new Cesium.Color( 0.3, 0.1, 0.0, 1.0),
+      ringFrequency : 4.0,
+      noiseScale : new Cesium.Cartesian2(0.4, 0.8),
+      grainFrequency : 18.0      
+    }
+  }
+});
+```
 
 Material uniforms:
 <ul>
-    <li>Asphalt</li>
+    <li><code>Asphalt</code></li>
     <ul>
         <li><code>asphaltColor</code>:  rgba color object for the asphalt's color.</li>
         <li><code>bumpSize</code>:  Number for the size of the asphalt's bumps.</li>
         <li><code>roughness</code>:  Number that controls how rough the asphalt looks.</li>
     </ul>
-    <li>Blob</li>
+    <li><code>Blob</code></li>
     <ul>
         <li><code>lightColor</code>:  rgba color object for the light color.</li>
         <li><code>darkColor</code>:  rgba color object for the dark color.</li>
         <li><code>frequency</code>:  Number that controls the frequency of the pattern.</li>
     </ul>
-	<li>Brick</li>
+	<li><code>Brick</code></li>
 	<ul>
 		<li><code>brickColor</code>:  rgba color object for the brick color.</li>
 		<li><code>mortarColor</code>:  rgba color object for the mortar color.</li>
@@ -72,43 +85,46 @@ Material uniforms:
 		<li><code>brickRoughness</code>:  Number between 0.0 and 1.0 representing how rough the brick looks.</li>
 		<li><code>mortarRoughness</code>:  Number between 0.0 and 1.0 representing how rough the mortar looks.</li>
 	</ul>
-    <li>Cement</li>
+    <li><code>Cement</code></li>
     <ul>
         <li><code>cementColor</code>:  rgba color object for the cement's color. </li>
         <li><code>grainScale</code>:  Number for the size of rock grains in the cement. </li>
         <li><code>roughness</code>:  Number that controls how rough the cement looks.</li>
     </ul>
-    <li>Erosion</li>
+    <li><code>Erosion</code></li>
     <ul>
         <li><code>color</code>:  diffuse color and alpha.</li>
         <li><code>time</code>:  Time of erosion.  1.0 is no erosion; 0.0 is fully eroded.</li>
     </ul>
-    <li>Facet</li>
+    <li><code>Facet</code></li>
     <ul>
         <li><code>lightColor</code>:  rgba color object for the light color.</li>
         <li><code>darkColor</code>:  rgba color object for the dark color.</li>
         <li><code>frequency</code>:  Number that controls the frequency of the pattern.</li>
     </ul>
-    <li>Grass</li>
+    <li><code>Grass</code></li>
     <ul>
         <li><code>grassColor</code>:  rgba color object for the grass' color. </li>
         <li><code>dirtColor</code>:  rgba color object for the dirt's color. </li>
         <li><code>patchiness</code>:  Number that controls the size of the color patches in the grass.</li>
     </ul>
-    <li>TieDye</li>
+    <li><code>TieDye</code></li>
     <ul>
         <li><code>lightColor</code>:  rgba color object for the light color.</li>
         <li><code>darkColor</code>:  rgba color object for the dark color.</li>
         <li><code>frequency</code>:  Number that controls the frequency of the pattern.</li>
     </ul>
-    <li>Wood</li>
+    <li><code>Wood</code></li>
     <ul>
         <li><code>lightWoodColor</code>:  rgba color object for the wood's base color.</li>
         <li><code>darkWoodColor</code>:  rgba color object for the color of rings in the wood.</li>
         <li><code>ringFrequency</code>:  Number for the frequency of rings in the wood.</li>
         <li><code>noiseScale</code>:  Object with x and y values specifying the noisiness of the ring patterns in both directions.</li>
+        <li><code>grainFrequency</code>:  Number for the frequency of grains in the wood.</li>
     </ul>
 </ul>
+
+For more on how to use Cesium materials, see [code for the example](Example/index.html) and the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).
 
 **Build**
 
@@ -125,5 +141,7 @@ Specify the target(s) at the command line:
 </pre>
 
 To run the example locally, run a server from the root directory and browse to <code>localhost:port/Example</code>.
+
+**Contributions**
 
 Contributions welcome.  We use the [same CLA as Cesium](https://github.com/AnalyticalGraphicsInc/cesium/blob/master/CONTRIBUTING.md).  Please email yours before opening a pull request.

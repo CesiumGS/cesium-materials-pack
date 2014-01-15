@@ -124,7 +124,7 @@ Material uniforms:
     </ul>
 </ul>
 
-For more on how to use Cesium materials, see [code for the example](Example/index.html) and the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).
+For more on how to use Cesium materials, see [code for the example](Example/index.html) and the [Fabric tutorial](https://github.com/AnalyticalGraphicsInc/cesium/wiki/Fabric).  To run the example locally, run a server from the root directory and browse to <code>localhost:port/Example</code>.
 
 **Build**
 
@@ -139,8 +139,6 @@ Specify the target(s) at the command line:
 <pre>
 ./Tools/apache-ant-1.8.2/bin/ant [target-name] [another-target-name] ...
 </pre>
-
-To run the example locally, run a server from the root directory and browse to <code>localhost:port/Example</code>.
 
 **Contributions**
 

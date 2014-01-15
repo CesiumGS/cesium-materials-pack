@@ -26,14 +26,14 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 
 **Usage**
 
-Prebuilt minified and unminified versions of the plugin are in the [Build](Build/) directory.  Include the `.js` file using a `script` tag and call `initializeMaterialPack` with the the global `Cesium` object as the argument.
+Prebuilt minified and unminified versions of the plugin are in the [Build](Build/) directory.  Include the `.js` file using a `script` tag and call `initialize` with the the global `Cesium` object as the argument.
 
 ```html
 <script type="text/javascript" src="path/to/Cesium.js" />
-<script type="text/javascript" src="path/to/CesiumMaterials.js" />
+<script type="text/javascript" src="path/to/MaterialPack.js" />
 <script type="text/javascript">
 // ...
-CesiumMaterials.initializeMaterialPack(Cesium);
+MaterialPack.initialize(Cesium);
 // ...
 var primitives = scene.getPrimitives();
 primitives.add(new Cesium.ExtentPrimitive({
@@ -130,8 +130,8 @@ For more on how to use Cesium materials, see [code for the example](Example/inde
 
 The following targets can be built:
    * `build` - A fast, developer-oriented build that prepares the source tree for use as standard [Asynchronous Module Definition (AMD)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules.
-   * `combine` - Runs `build`, plus uses [NodeJS](http://nodejs.org/) to run [the RequireJS optimizer](http://requirejs.org/docs/optimization.html) to combine Cesium materials and [the Almond AMD loader](http://requirejs.org/docs/faq-optimization.html#wrap) to produce an all-in-one file in the `Build/CesiumMaterials` directory.
-   * `minify` - Runs `combine`, plus [minifies](http://en.wikipedia.org/wiki/Minification_(programming\)) CesiumMaterials.js using [UglifyJS2](https://github.com/mishoo/UglifyJS2) for a smaller deployable file.
+   * `combine` - Runs `build`, plus uses [NodeJS](http://nodejs.org/) to run [the RequireJS optimizer](http://requirejs.org/docs/optimization.html) to combine Cesium materials and [the Almond AMD loader](http://requirejs.org/docs/faq-optimization.html#wrap) to produce an all-in-one file in the `Build/MaterialPack` directory.
+   * `minify` - Runs `combine`, plus [minifies](http://en.wikipedia.org/wiki/Minification_(programming\)) MaterialPack.js using [UglifyJS2](https://github.com/mishoo/UglifyJS2) for a smaller deployable file.
    * `clean` - Removes all generated build artifacts.
 
 Specify the target(s) at the command line:

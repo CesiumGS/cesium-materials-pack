@@ -6,7 +6,7 @@
 			<existingjsfiles dir="${shadersDirectory}" includes="**/*.js" excludes="*.profile.js" />
 		</glslToJavascript>
 
-		<createCesiumJs output="${sourceDirectory}/CesiumMaterials.js">
+		<createCesiumJs output="${sourceDirectory}/MaterialPack.js">
 			<sourcefiles refid="cesiumJsFiles" />
 		</createCesiumJs>
 	</target>
@@ -21,7 +21,7 @@
 
 	<target name="clean" description="Removes all generated build artifacts.">
 		<delete includeEmptyDirs="true" failonerror="false">
-			<fileset dir="${sourceDirectory}" includes="CesiumMaterials.js" />
+			<fileset dir="${sourceDirectory}" includes="MaterialPack.js" />
 			<fileset dir="${buildDirectory}" defaultexcludes="false" />
 			<fileset dir="${shadersDirectory}" includes="**/*.js" excludes="*.profile.js" />
 		</delete>
@@ -44,8 +44,8 @@
 
 	<!-- Outputs -->
 	<property name="buildDirectory" location="Build" />
-	<property name="buildOutputDirectory" location="${buildDirectory}/CesiumMaterials" />
-	<property name="unminifiedOutputDirectory" location="${buildDirectory}/CesiumMaterialsUnminified" />
+	<property name="buildOutputDirectory" location="${buildDirectory}/MaterialPack" />
+	<property name="unminifiedOutputDirectory" location="${buildDirectory}/MaterialPackUnminified" />
 
 	<path id="javascriptClassPath">
 		<pathelement path="${rhinoJarPath}" />
@@ -59,7 +59,7 @@
 			<exclude name="*.js" />
 		</fileset>
 		<fileset dir="${sourceDirectory}">
-			<include name="initializeMaterialPack.js" />
+			<include name="initialize.js" />
 		</fileset>
 	</union>
 
@@ -114,7 +114,7 @@
 		<mkdir dir="${combineOutputDirectory}" />
 		<property name="relativeCombineOutputDirectory" location="${combineOutputDirectory}" relative="true" basedir="${sourceDirectory}" />
 
-		<!-- create combined CesiumMaterials.js	-->
+		<!-- create combined MaterialPack.js	-->
 		<antcall target="combineJavaScript.combineCesium" />
 
 		<!-- copy to build folder with copyright header added at the top -->
@@ -148,12 +148,12 @@
 			<arg value="skipModuleInsertion=true" />
 			<arg value="name=${relativeAlmondPath}" />
 			<arg value="include=main" />
-			<arg value="out=${relativeCombineOutputDirectory}/CesiumMaterials.js" />
+			<arg value="out=${relativeCombineOutputDirectory}/MaterialPack.js" />
 		</exec>
 	</target>
 
 	<target name="combineJavaScript.combineCesium.check">
-		<uptodate property="no.combineCesium.create" targetfile="${outputDirectory}/CesiumMaterials.js">
+		<uptodate property="no.combineCesium.create" targetfile="${outputDirectory}/MaterialPack.js">
 			<srcfiles refid="cesiumJsFiles" />
 		</uptodate>
 	</target>

@@ -906,7 +906,7 @@ return material;\n\
 ";
 });
 /*global define*/
-define('initializeMaterialPack',[
+define('initialize',[
         './Shaders/AsphaltMaterial',
         './Shaders/BlobMaterial',
         './Shaders/BrickMaterial',
@@ -930,7 +930,7 @@ define('initializeMaterialPack',[
         CzmBuiltins) {
 	"use strict";
 
-    function initializeMaterialPack(Cesium) {
+    function initialize(Cesium) {
     	for ( var builtinName in CzmBuiltins) {
 			if (CzmBuiltins.hasOwnProperty(builtinName)) {
 				Cesium.ShaderProgram._czmBuiltinsAndUniforms[builtinName] = CzmBuiltins[builtinName];
@@ -1092,38 +1092,38 @@ define('initializeMaterialPack',[
 		});
 	}
 
-	return initializeMaterialPack;
+	return initialize;
 });
 /*global define*/
-define('CesiumMaterials',['./Shaders/AsphaltMaterial', './Shaders/BlobMaterial', './Shaders/BrickMaterial', './Shaders/Builtin/CzmBuiltins', './Shaders/Builtin/Functions/cellular', './Shaders/Builtin/Functions/snoise', './Shaders/CementMaterial', './Shaders/ErosionMaterial', './Shaders/FacetMaterial', './Shaders/GrassMaterial', './Shaders/TieDyeMaterial', './Shaders/WoodMaterial', './initializeMaterialPack'], function(Shaders_AsphaltMaterial, Shaders_BlobMaterial, Shaders_BrickMaterial, Shaders_Builtin_CzmBuiltins, Shaders_Builtin_Functions_cellular, Shaders_Builtin_Functions_snoise, Shaders_CementMaterial, Shaders_ErosionMaterial, Shaders_FacetMaterial, Shaders_GrassMaterial, Shaders_TieDyeMaterial, Shaders_WoodMaterial, initializeMaterialPack) {
+define('MaterialPack',['./Shaders/AsphaltMaterial', './Shaders/BlobMaterial', './Shaders/BrickMaterial', './Shaders/Builtin/CzmBuiltins', './Shaders/Builtin/Functions/cellular', './Shaders/Builtin/Functions/snoise', './Shaders/CementMaterial', './Shaders/ErosionMaterial', './Shaders/FacetMaterial', './Shaders/GrassMaterial', './Shaders/TieDyeMaterial', './Shaders/WoodMaterial', './initialize'], function(Shaders_AsphaltMaterial, Shaders_BlobMaterial, Shaders_BrickMaterial, Shaders_Builtin_CzmBuiltins, Shaders_Builtin_Functions_cellular, Shaders_Builtin_Functions_snoise, Shaders_CementMaterial, Shaders_ErosionMaterial, Shaders_FacetMaterial, Shaders_GrassMaterial, Shaders_TieDyeMaterial, Shaders_WoodMaterial, initialize) {
   "use strict";
   /*jshint sub:true*/
-  var CesiumMaterials = {
+  var MaterialPack = {
     _shaders : {}
   };
-  CesiumMaterials._shaders['AsphaltMaterial'] = Shaders_AsphaltMaterial;
-  CesiumMaterials._shaders['BlobMaterial'] = Shaders_BlobMaterial;
-  CesiumMaterials._shaders['BrickMaterial'] = Shaders_BrickMaterial;
-  CesiumMaterials._shaders['CzmBuiltins'] = Shaders_Builtin_CzmBuiltins;
-  CesiumMaterials._shaders['cellular'] = Shaders_Builtin_Functions_cellular;
-  CesiumMaterials._shaders['snoise'] = Shaders_Builtin_Functions_snoise;
-  CesiumMaterials._shaders['CementMaterial'] = Shaders_CementMaterial;
-  CesiumMaterials._shaders['ErosionMaterial'] = Shaders_ErosionMaterial;
-  CesiumMaterials._shaders['FacetMaterial'] = Shaders_FacetMaterial;
-  CesiumMaterials._shaders['GrassMaterial'] = Shaders_GrassMaterial;
-  CesiumMaterials._shaders['TieDyeMaterial'] = Shaders_TieDyeMaterial;
-  CesiumMaterials._shaders['WoodMaterial'] = Shaders_WoodMaterial;
-  CesiumMaterials['initializeMaterialPack'] = initializeMaterialPack;
-  return CesiumMaterials;
+  MaterialPack._shaders['AsphaltMaterial'] = Shaders_AsphaltMaterial;
+  MaterialPack._shaders['BlobMaterial'] = Shaders_BlobMaterial;
+  MaterialPack._shaders['BrickMaterial'] = Shaders_BrickMaterial;
+  MaterialPack._shaders['CzmBuiltins'] = Shaders_Builtin_CzmBuiltins;
+  MaterialPack._shaders['cellular'] = Shaders_Builtin_Functions_cellular;
+  MaterialPack._shaders['snoise'] = Shaders_Builtin_Functions_snoise;
+  MaterialPack._shaders['CementMaterial'] = Shaders_CementMaterial;
+  MaterialPack._shaders['ErosionMaterial'] = Shaders_ErosionMaterial;
+  MaterialPack._shaders['FacetMaterial'] = Shaders_FacetMaterial;
+  MaterialPack._shaders['GrassMaterial'] = Shaders_GrassMaterial;
+  MaterialPack._shaders['TieDyeMaterial'] = Shaders_TieDyeMaterial;
+  MaterialPack._shaders['WoodMaterial'] = Shaders_WoodMaterial;
+  MaterialPack['initialize'] = initialize;
+  return MaterialPack;
 });
 /*global require*/
 // require in the complete Cesium object and reassign it globally.
 // This is meant for use with the Almond loader.
-require(['CesiumMaterials'], function(CesiumMaterials) {
+require(['MaterialPack'], function(MaterialPack) {
     "use strict";
     /*global self*/
     var scope = typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {};
 
-    scope.CesiumMaterials = CesiumMaterials;
+    scope.MaterialPack = MaterialPack;
 }, undefined, true);
 }());

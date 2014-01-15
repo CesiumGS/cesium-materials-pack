@@ -4,14 +4,14 @@
 <link rel="stylesheet" href="http://cesiumjs.org/releases/b24/Widgets/widgets.css">
 <link rel="stylesheet" href="example.css">
 <script type="text/javascript" src="http://cesiumjs.org/releases/b24/Cesium.js"></script>
-<script type="text/javascript" src="../Build/CesiumMaterialsUnminified/CesiumMaterials.js"></script>
+<script type="text/javascript" src="../Build/MaterialPackUnminified/MaterialPack.js"></script>
 </head>
 <body>
 <div id="cesiumContainer" class="fullWindow"></div>
 <script type="text/javascript">
 	"use strict";
 
-	CesiumMaterials.initializeMaterialPack(Cesium);
+	MaterialPack.initialize(Cesium);
 
 	var widget = new Cesium.CesiumWidget('cesiumContainer');
 

@@ -26,7 +26,7 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 
 **Usage**
 
-To use the plugin, load the built script and call `initializeMaterialPack` with the the global `Cesium` object as the argument.
+Prebuilt minified and unminified versions of the plugin are in the [Build](Build/) directory.  Include the `.js` file using a `script` tag and call `initializeMaterialPack` with the the global `Cesium` object as the argument.
 
 ```
 <script type="text/javascript" src="path/to/Cesium.js" />

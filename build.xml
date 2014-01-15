@@ -59,7 +59,7 @@
 			<exclude name="*.js" />
 		</fileset>
 		<fileset dir="${sourceDirectory}">
-			<include name="addMaterialPack.js" />
+			<include name="initializeMaterialPack.js" />
 		</fileset>
 	</union>
 

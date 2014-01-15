@@ -26,14 +26,14 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 
 **Usage**
 
-To use the plugin, load the built script and call `addMaterialPack` with the the global `Cesium` object as the argument.
+To use the plugin, load the built script and call `initializeMaterialPack` with the the global `Cesium` object as the argument.
 
 ```
 <script type="text/javascript" src="path/to/Cesium.js" />
 <script type="text/javascript" src="path/to/CesiumMaterials.js" />
 <script type="text/javascript">
 // ...
-CesiumMaterials.addMaterialPack(Cesium);
+CesiumMaterials.initializeMaterialPack(Cesium);
 // ...
 var primitives = scene.getPrimitives();
 primitives.add(new Cesium.ExtentPrimitive({

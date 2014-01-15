@@ -23,7 +23,7 @@ define([
         CzmBuiltins) {
 	"use strict";
 
-    function addMaterialPack(Cesium) {
+    function initializeMaterialPack(Cesium) {
     	for ( var builtinName in CzmBuiltins) {
 			if (CzmBuiltins.hasOwnProperty(builtinName)) {
 				Cesium.ShaderProgram._czmBuiltinsAndUniforms[builtinName] = CzmBuiltins[builtinName];
@@ -185,5 +185,5 @@ define([
 		});
 	}
 
-	return addMaterialPack;
+	return initializeMaterialPack;
 });

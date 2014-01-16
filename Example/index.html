@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Cesium Materials Demo</title>
+<link rel="stylesheet" href="http://cesiumjs.org/releases/b24/Widgets/widgets.css">
+<link rel="stylesheet" href="example.css">
+<script type="text/javascript" src="http://cesiumjs.org/releases/b24/Cesium.js"></script>
+<script type="text/javascript" src="../Build/MaterialPackUnminified/MaterialPack.js"></script>
+</head>
+<body>
+<div id="cesiumContainer" class="fullWindow"></div>
+<script type="text/javascript">
+MaterialPack.initialize(Cesium);
+
+var widget = new Cesium.CesiumWidget('cesiumContainer');
+
+var scene = widget.scene;
+var primitives = scene.getPrimitives();
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-120.0),
+                Cesium.Math.toRadians(30.0),
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(40.0)),
+    material : Cesium.Material.fromType('Asphalt')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(30.0),
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(40.0)),
+    material : Cesium.Material.fromType('Blob')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(30.0),
+                Cesium.Math.toRadians(-60.0),
+                Cesium.Math.toRadians(40.0)),
+    material : Cesium.Material.fromType('Brick')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-120.0),
+                Cesium.Math.toRadians(20.0),
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(30.0)),
+    material : Cesium.Material.fromType('Cement')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(20.0),
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(30.0)),
+    material : Cesium.Material.fromType('Facet')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(20.0),
+                Cesium.Math.toRadians(-60.0),
+                Cesium.Math.toRadians(30.0)),
+    material : Cesium.Material.fromType('Grass')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-120.0),
+                Cesium.Math.toRadians(10.0),
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(20.0)),
+    material : Cesium.Material.fromType('TieDye')
+}));
+
+primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-100.0),
+                Cesium.Math.toRadians(10.0),
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(20.0)),
+    material : Cesium.Material.fromType('Wood')
+}));
+
+var extent = primitives.add(new Cesium.ExtentPrimitive({
+    extent : new Cesium.Extent(
+                Cesium.Math.toRadians(-80.0),
+                Cesium.Math.toRadians(10.0),
+                Cesium.Math.toRadians(-60.0),
+                Cesium.Math.toRadians(20.0)),
+    material : Cesium.Material.fromType('Erosion')
+}));
+scene.getAnimations().addProperty(extent.material.uniforms, 'time', 0.0, 1.0, {
+    duration : 6000
+});
+</script>
+</body>
+</html>

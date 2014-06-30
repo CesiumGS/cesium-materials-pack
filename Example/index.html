@@ -1,9 +1,9 @@
 <html>
 <head>
 <title>Cesium Materials Demo</title>
-<link rel="stylesheet" href="http://cesiumjs.org/releases/b24/Widgets/widgets.css">
+<link rel="stylesheet" href="http://cesiumjs.org/releases/b29/Widgets/widgets.css">
 <link rel="stylesheet" href="example.css">
-<script type="text/javascript" src="http://cesiumjs.org/releases/b24/Cesium.js"></script>
+<script type="text/javascript" src="http://cesiumjs.org/releases/b29/Cesium.js"></script>
 <script type="text/javascript" src="../Build/MaterialPackUnminified/MaterialPack.js"></script>
 </head>
 <body>
@@ -14,10 +14,10 @@ MaterialPack.initialize(Cesium);
 var widget = new Cesium.CesiumWidget('cesiumContainer');
 
 var scene = widget.scene;
-var primitives = scene.getPrimitives();
+var primitives = scene.primitives;
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-120.0),
                 Cesium.Math.toRadians(30.0),
                 Cesium.Math.toRadians(-100.0),
@@ -25,8 +25,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Asphalt')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-100.0),
                 Cesium.Math.toRadians(30.0),
                 Cesium.Math.toRadians(-80.0),
@@ -34,8 +34,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Blob')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-80.0),
                 Cesium.Math.toRadians(30.0),
                 Cesium.Math.toRadians(-60.0),
@@ -43,8 +43,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Brick')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-120.0),
                 Cesium.Math.toRadians(20.0),
                 Cesium.Math.toRadians(-100.0),
@@ -52,8 +52,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Cement')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-100.0),
                 Cesium.Math.toRadians(20.0),
                 Cesium.Math.toRadians(-80.0),
@@ -61,8 +61,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Facet')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-80.0),
                 Cesium.Math.toRadians(20.0),
                 Cesium.Math.toRadians(-60.0),
@@ -70,8 +70,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Grass')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-120.0),
                 Cesium.Math.toRadians(10.0),
                 Cesium.Math.toRadians(-100.0),
@@ -79,8 +79,8 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('TieDye')
 }));
 
-primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-100.0),
                 Cesium.Math.toRadians(10.0),
                 Cesium.Math.toRadians(-80.0),
@@ -88,17 +88,121 @@ primitives.add(new Cesium.ExtentPrimitive({
     material : Cesium.Material.fromType('Wood')
 }));
 
-var extent = primitives.add(new Cesium.ExtentPrimitive({
-    extent : new Cesium.Extent(
+var rectangle = primitives.add(new Cesium.RectanglePrimitive({
+    rectangle : new Cesium.Rectangle(
                 Cesium.Math.toRadians(-80.0),
                 Cesium.Math.toRadians(10.0),
                 Cesium.Math.toRadians(-60.0),
                 Cesium.Math.toRadians(20.0)),
     material : Cesium.Material.fromType('Erosion')
 }));
-scene.getAnimations().addProperty(extent.material.uniforms, 'time', 0.0, 1.0, {
+scene.animations.addProperty(rectangle.material.uniforms, 'time', 0.0, 1.0, {
     duration : 6000
 });
+
+var imagePath = 'images/checkerboard.png';
+var radius = 500000.0;
+var radii = new Cesium.Cartesian3(radius, radius, radius);
+var height = radius * 0.5;
+
+primitives.add(new Cesium.EllipsoidPrimitive({
+	center : Cesium.Cartesian3.fromDegrees(-110.0, 50.0, height),
+	radii : radii,
+	material : new Cesium.Material({
+		fabric : {
+            materials : {
+                fresnel : {
+                    type : 'Fresnel',
+                    materials : {
+                        reflection : {
+                            uniforms : {
+                                cubeMap : {
+                                    positiveX : imagePath,
+                                    negativeX : imagePath,
+                                    positiveY : imagePath,
+                                    negativeY : imagePath,
+                                    positiveZ : imagePath,
+                                    negativeZ : imagePath
+                                }
+                            }
+                        },
+                        refraction : {
+                            uniforms : {
+                                cubeMap : {
+                                    positiveX : imagePath,
+                                    negativeX : imagePath,
+                                    positiveY : imagePath,
+                                    negativeY : imagePath,
+                                    positiveZ : imagePath,
+                                    negativeZ : imagePath
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            components: {
+                diffuse: 'fresnel.diffuse + 0.7'
+            }
+        }
+	})
+}));
+
+primitives.add(new Cesium.EllipsoidPrimitive({
+    center : Cesium.Cartesian3.fromDegrees(-90.0, 50.0, height),
+    radii : radii,
+    material : new Cesium.Material({
+        fabric : {
+            materials : {
+                reflection: {
+                    type : 'Reflection',
+                    uniforms: {
+                        cubeMap: {
+                            positiveX: imagePath,
+                            negativeX: imagePath,
+                            positiveY: imagePath,
+                            negativeY: imagePath,
+                            positiveZ: imagePath,
+                            negativeZ: imagePath
+                        }
+                    }
+                }
+            },
+            components: {
+                diffuse: 'reflection.diffuse + 0.7'
+            }
+        }
+    })
+}));
+
+primitives.add(new Cesium.EllipsoidPrimitive({
+    center : Cesium.Cartesian3.fromDegrees(-70.0, 50.0, height),
+    radii : radii,
+    material : new Cesium.Material({
+        fabric : {
+            materials : {
+                refraction: {
+                    type : 'Refraction',
+                    uniforms: {
+                        cubeMap: {
+                            positiveX: imagePath,
+                            negativeX: imagePath,
+                            positiveY: imagePath,
+                            negativeY: imagePath,
+                            positiveZ: imagePath,
+                            negativeZ: imagePath
+                        },
+                        indexOfRefractionRatio: 0.9
+                    }
+                }
+            },
+            components: {
+                diffuse: 'refraction.diffuse + 0.7'
+            }
+        }
+    })
+}));
+
 </script>
 </body>
 </html>

@@ -16,11 +16,14 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 | `Cement` | <img src="Documentation/Images/Cement.PNG" width="200" height="92" /> | Cement generated with simplex noise. |
 | `Erosion` | <img src="Documentation/Images/Erosion.png" width="200" height="92" /> | Animated erosion. |
 | `Facet` | <img src="Documentation/Images/Facet.PNG" width="200" height="92" /> | Facet generated with cellular noise. |
+| `Fresnel` | <img src="Materials/Fresnel.PNG" width="200" height="92" /> | A view-dependent combination of reflection and refraction.  Similar to water, when the viewer is looking straight down, the material refracts light; as the viewer looks more edge on, the material refracts less and reflects more. |
 | `Grass` | <img src="Documentation/Images/Grass.PNG" width="200" height="92" /> | Grass generated with simplex noise. |
+| `Reflection` | <img src="Materials/Reflection.PNG" width="200" height="92" /> | Cube map reflection for mirror-like surfaces that reflect light, e.g., paint on a car. |
+| `Refraction` | <img src="Materials/Refraction.PNG" width="200" height="92" /> | Cube map refraction for translucent surfaces that refract light, e.g., glass. |
 | `TieDye` | <img src="Documentation/Images/TieDye.PNG" width="200" height="92" /> | Tie-dye generated with simplex noise. |
 | `Wood` | <img src="Documentation/Images/Wood.PNG" width="200" height="92" /> | Wood generated with simplex noise. |
 
-**Cesium version**: Tested against [b24](http://cesiumjs.org/downloads.html).  Most likely works with older and newer versions.  Post a message to the [Cesium forum](http://cesiumjs.org/forum.html) if you have compatibility issues.
+**Cesium version**: Tested against [b29](http://cesiumjs.org/downloads.html).  Most likely works with older and newer versions.  Post a message to the [Cesium forum](http://cesiumjs.org/forum.html) if you have compatibility issues.
 
 **License**: Apache 2.0.  Free for commercial and non-commercial use.  See [LICENSE.md](LICENSE.md).
 
@@ -102,11 +105,27 @@ Material uniforms:
         <li><code>darkColor</code>:  rgba color object for the dark color.</li>
         <li><code>frequency</code>:  Number that controls the frequency of the pattern.</li>
     </ul>
+    <li>Fresnel</li>
+    <ul>
+        <li><code>reflection</code>:  Reflection Material.</li>
+        <li><code>refraction</code>:  Refraction Material.</li>
+    </ul>
     <li><code>Grass</code></li>
     <ul>
         <li><code>grassColor</code>:  rgba color object for the grass' color. </li>
         <li><code>dirtColor</code>:  rgba color object for the dirt's color. </li>
         <li><code>patchiness</code>:  Number that controls the size of the color patches in the grass.</li>
+    </ul>
+    <li>Reflection</li>
+    <ul>
+        <li><code>cubeMap</code>:  Object with positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ image paths. </li>
+        <li><code>channels</code>:  Three character string containing any combination of r, g, b, and a for selecting the desired image channels.</li>
+    </ul>
+    <li>Refraction</li>
+    <ul>
+        <li><code>cubeMap</code>:  Object with positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ image paths. </li>
+        <li><code>channels</code>:  Three character string containing any combination of r, g, b, and a for selecting the desired image channels.</li>
+        <li><code>indexOfRefractionRatio</code>:  Number representing the refraction strength where 1.0 is the lowest and 0.0 is the highest.</li>
     </ul>
     <li><code>TieDye</code></li>
     <ul>

@@ -6,7 +6,10 @@ define([
         './Shaders/CementMaterial',
         './Shaders/ErosionMaterial',
         './Shaders/FacetMaterial',
+        './Shaders/FresnelMaterial',
         './Shaders/GrassMaterial',
+        './Shaders/ReflectionMaterial',
+        './Shaders/RefractionMaterial',
         './Shaders/TieDyeMaterial',
         './Shaders/WoodMaterial',
         './Shaders/Builtin/CzmBuiltins'
@@ -17,7 +20,10 @@ define([
         CementMaterial,
         ErosionMaterial,
         FacetMaterial,
+        FresnelMaterial,
         GrassMaterial,
+        ReflectionMaterial,
+        RefractionMaterial,
         TieDyeMaterial,
         WoodMaterial,
         CzmBuiltins) {
@@ -130,6 +136,23 @@ define([
                 return (uniforms.lightColor.alpha < 1.0) || (uniforms.darkColor.alpha < 0.0);
             }
         });
+        
+        Cesium.Material.FresnelType = 'Fresnel';
+        Cesium.Material._materialCache.addMaterial(Cesium.Material.FresnelType, {
+            fabric : {
+                type : Cesium.Material.FresnelType,
+                materials : {
+                    reflection : {
+                        type : Cesium.Material.ReflectionType
+                    },
+                    refraction : {
+                        type : Cesium.Material.RefractionType
+                    }
+                },
+                source : FresnelMaterial
+            },
+            translucent : false
+        });
 
         Cesium.Material.GrassType = 'Grass';
         Cesium.Material._materialCache.addMaterial(Cesium.Material.GrassType, {
@@ -146,6 +169,33 @@ define([
                 var uniforms = material.uniforms;
                 return (uniforms.grassColor.alpha < 1.0) || (uniforms.dirtColor.alpha < 1.0);
             }
+        });
+        
+        Cesium.Material.ReflectionType = 'Reflection';
+        Cesium.Material._materialCache.addMaterial(Cesium.Material.ReflectionType, {
+            fabric : {
+                type : Cesium.Material.ReflectionType,
+                uniforms : {
+                    cubeMap : Cesium.Material.DefaultCubeMapId,
+                    channels : 'rgb'
+                },
+                source : ReflectionMaterial
+            },
+            translucent : false
+        });
+
+        Cesium.Material.RefractionType = 'Refraction';
+        Cesium.Material._materialCache.addMaterial(Cesium.Material.RefractionType, {
+            fabric : {
+                type : Cesium.Material.RefractionType,
+                uniforms : {
+                    cubeMap : Cesium.Material.DefaultCubeMapId,
+                    channels : 'rgb',
+                    indexOfRefractionRatio : 0.9
+                },
+                source : RefractionMaterial
+            },
+            translucent : false
         });
 
         Cesium.Material.TyeDyeType = 'TieDye';

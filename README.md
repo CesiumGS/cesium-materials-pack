@@ -16,10 +16,10 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 | `Cement` | <img src="Documentation/Images/Cement.PNG" width="200" height="92" /> | Cement generated with simplex noise. |
 | `Erosion` | <img src="Documentation/Images/Erosion.png" width="200" height="92" /> | Animated erosion. |
 | `Facet` | <img src="Documentation/Images/Facet.PNG" width="200" height="92" /> | Facet generated with cellular noise. |
-| `Fresnel` | <img src="Materials/Fresnel.PNG" width="200" height="92" /> | A view-dependent combination of reflection and refraction.  Similar to water, when the viewer is looking straight down, the material refracts light; as the viewer looks more edge on, the material refracts less and reflects more. |
+| `Fresnel` | <img src="Documentation/Images/Fresnel.PNG" width="200" height="92" /> | A view-dependent combination of reflection and refraction.  Similar to water, when the viewer is looking straight down, the material refracts light; as the viewer looks more edge on, the material refracts less and reflects more. |
 | `Grass` | <img src="Documentation/Images/Grass.PNG" width="200" height="92" /> | Grass generated with simplex noise. |
-| `Reflection` | <img src="Materials/Reflection.PNG" width="200" height="92" /> | Cube map reflection for mirror-like surfaces that reflect light, e.g., paint on a car. |
-| `Refraction` | <img src="Materials/Refraction.PNG" width="200" height="92" /> | Cube map refraction for translucent surfaces that refract light, e.g., glass. |
+| `Reflection` | <img src="Documentation/Images/Reflection.PNG" width="200" height="92" /> | Cube map reflection for mirror-like surfaces that reflect light, e.g., paint on a car. |
+| `Refraction` | <img src="Documentation/Images/Refraction.PNG" width="200" height="92" /> | Cube map refraction for translucent surfaces that refract light, e.g., glass. |
 | `TieDye` | <img src="Documentation/Images/TieDye.PNG" width="200" height="92" /> | Tie-dye generated with simplex noise. |
 | `Wood` | <img src="Documentation/Images/Wood.PNG" width="200" height="92" /> | Wood generated with simplex noise. |
 

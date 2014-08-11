@@ -1,16 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Cesium Materials Demo</title>
-<link rel="stylesheet" href="http://cesiumjs.org/releases/b29/Widgets/widgets.css">
-<link rel="stylesheet" href="example.css">
-<script type="text/javascript" src="http://cesiumjs.org/releases/b29/Cesium.js"></script>
-<script type="text/javascript" src="../Build/MaterialPackUnminified/MaterialPack.js"></script>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version (or Chrome Frame if pre-IE11). -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Cesium Material Pack Demo</title>
+
+  <link rel="stylesheet" href="//cesiumjs.org/releases/1.0/Build/Cesium/Widgets/widgets.css" />
+  <script src="//cesiumjs.org/releases/1.0/Build/CesiumUnminified/Cesium.js"></script>
+  <script src="../Build/Unminified/MaterialPack.js"></script>
+
+  <link rel="stylesheet" href="example.css">
 </head>
 <body>
-<div id="cesiumContainer" class="fullWindow"></div>
-<script type="text/javascript">
-MaterialPack.initialize(Cesium);
-
+  <div id="cesiumContainer" class="fullWindow"></div>
+<script>
 var widget = new Cesium.CesiumWidget('cesiumContainer');
 
 var scene = widget.scene;
@@ -96,8 +103,12 @@ var rectangle = primitives.add(new Cesium.RectanglePrimitive({
                 Cesium.Math.toRadians(20.0)),
     material : Cesium.Material.fromType('Erosion')
 }));
-scene.animations.addProperty(rectangle.material.uniforms, 'time', 0.0, 1.0, {
-    duration : 6000
+scene.tweens.addProperty({
+    object : rectangle.material.uniforms,
+    property : 'time',
+    startValue : 0.0,
+    stopValue : 1.0,
+    duration : 6.0
 });
 
 var imagePath = 'images/checkerboard.png';
@@ -202,7 +213,6 @@ primitives.add(new Cesium.EllipsoidPrimitive({
         }
     })
 }));
-
 </script>
 </body>
 </html>

@@ -10,8 +10,8 @@
   <title>Cesium Material Pack Demo</title>
 
   <link rel="stylesheet" href="//cesiumjs.org/releases/1.0/Build/Cesium/Widgets/widgets.css" />
-  <script src="//cesiumjs.org/releases/1.0/Build/CesiumUnminified/Cesium.js"></script>
-  <script src="../Build/Unminified/MaterialPack.js"></script>
+  <script src="//cesiumjs.org/releases/1.0/Build/Cesium/Cesium.js"></script>
+  <script src="../Build/MaterialPack.js"></script>
 
   <link rel="stylesheet" href="example.css">
 </head>
@@ -24,83 +24,47 @@ var scene = widget.scene;
 var primitives = scene.primitives;
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-120.0),
-                Cesium.Math.toRadians(30.0),
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(40.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-120.0, 30.0, -100.0, 40.0),
     material : Cesium.Material.fromType('Asphalt')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(30.0),
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(40.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-100.0, 30.0, -80.0, 40.0),
     material : Cesium.Material.fromType('Blob')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(30.0),
-                Cesium.Math.toRadians(-60.0),
-                Cesium.Math.toRadians(40.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-80.0, 30.0, -60.0, 40.0),
     material : Cesium.Material.fromType('Brick')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-120.0),
-                Cesium.Math.toRadians(20.0),
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(30.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-120.0, 20.0, -100.0, 30.0),
     material : Cesium.Material.fromType('Cement')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(20.0),
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(30.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-100.0, 20.0, -80.0, 30.0),
     material : Cesium.Material.fromType('Facet')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(20.0),
-                Cesium.Math.toRadians(-60.0),
-                Cesium.Math.toRadians(30.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-80.0, 20.0, -60.0, 30.0),
     material : Cesium.Material.fromType('Grass')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-120.0),
-                Cesium.Math.toRadians(10.0),
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(20.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-120.0, 10.0, -100.0, 20.0),
     material : Cesium.Material.fromType('TieDye')
 }));
 
 primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-100.0),
-                Cesium.Math.toRadians(10.0),
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(20.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-100.0, 10.0, -80.0, 20.0),
     material : Cesium.Material.fromType('Wood')
 }));
 
 var rectangle = primitives.add(new Cesium.RectanglePrimitive({
-    rectangle : new Cesium.Rectangle(
-                Cesium.Math.toRadians(-80.0),
-                Cesium.Math.toRadians(10.0),
-                Cesium.Math.toRadians(-60.0),
-                Cesium.Math.toRadians(20.0)),
+    rectangle : Cesium.Rectangle.fromDegrees(-80.0, 10.0, -60.0, 20.0),
     material : Cesium.Material.fromType('Erosion')
 }));
 scene.tweens.addProperty({
@@ -108,7 +72,7 @@ scene.tweens.addProperty({
     property : 'time',
     startValue : 0.0,
     stopValue : 1.0,
-    duration : 6.0
+    duration : 10.0
 });
 
 var imagePath = 'images/checkerboard.png';

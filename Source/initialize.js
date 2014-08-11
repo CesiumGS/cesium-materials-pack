@@ -60,7 +60,12 @@ define([
     czm_cellular = replaceNewLines(czm_cellular);
     czm_snoise = replaceNewLines(czm_snoise);
 
-    function initialize() {
+    var initialized = false;
+    var initialize = function() {
+        if (initialized) {
+            return;
+        }
+
         ShaderProgram._czmBuiltinsAndUniforms.czm_cellular = czm_cellular;
         ShaderProgram._czmBuiltinsAndUniforms.czm_snoise = czm_snoise;
 
@@ -261,7 +266,9 @@ define([
                 return (uniforms.lightWoodColor.alpha < 1.0) || (uniforms.darkWoodColor.alpha < 1.0);
             }
         });
-    }
+
+        initialized = true;
+    };
 
     return initialize;
 });

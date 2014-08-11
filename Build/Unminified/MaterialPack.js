@@ -524,22 +524,33 @@ define('initialize',[
         czm_snoise) {
     "use strict";
 
-    AsphaltMaterial = AsphaltMaterial.replace(/\r\n/g, '\n');
-    BlobMaterial = BlobMaterial.replace(/\r\n/g, '\n');
-    BrickMaterial = BrickMaterial.replace(/\r\n/g, '\n');
-    CementMaterial = CementMaterial.replace(/\r\n/g, '\n');
-    ErosionMaterial = ErosionMaterial.replace(/\r\n/g, '\n');
-    FacetMaterial = FacetMaterial.replace(/\r\n/g, '\n');
-    FresnelMaterial = FresnelMaterial.replace(/\r\n/g, '\n');
-    GrassMaterial = GrassMaterial.replace(/\r\n/g, '\n');
-    ReflectionMaterial = ReflectionMaterial.replace(/\r\n/g, '\n');
-    RefractionMaterial = RefractionMaterial.replace(/\r\n/g, '\n');
-    TieDyeMaterial = TieDyeMaterial.replace(/\r\n/g, '\n');
-    WoodMaterial = WoodMaterial.replace(/\r\n/g, '\n');
-    czm_cellular = czm_cellular.replace(/\r\n/g, '\n');
-    czm_snoise = czm_snoise.replace(/\r\n/g, '\n');
+    function replaceNewLines(s) {
+        return s.replace(/\r\n/g, '\n');
+    }
 
-    function initialize() {
+    // remove Windows line endings, if present, to work around
+    // the crash fixed in https://github.com/AnalyticalGraphicsInc/cesium/pull/2048
+    AsphaltMaterial = replaceNewLines(AsphaltMaterial);
+    BlobMaterial = replaceNewLines(BlobMaterial);
+    BrickMaterial = replaceNewLines(BrickMaterial);
+    CementMaterial = replaceNewLines(CementMaterial);
+    ErosionMaterial = replaceNewLines(ErosionMaterial);
+    FacetMaterial = replaceNewLines(FacetMaterial);
+    FresnelMaterial = replaceNewLines(FresnelMaterial);
+    GrassMaterial = replaceNewLines(GrassMaterial);
+    ReflectionMaterial = replaceNewLines(ReflectionMaterial);
+    RefractionMaterial = replaceNewLines(RefractionMaterial);
+    TieDyeMaterial = replaceNewLines(TieDyeMaterial);
+    WoodMaterial = replaceNewLines(WoodMaterial);
+    czm_cellular = replaceNewLines(czm_cellular);
+    czm_snoise = replaceNewLines(czm_snoise);
+
+    var initialized = false;
+    var initialize = function() {
+        if (initialized) {
+            return;
+        }
+
         ShaderProgram._czmBuiltinsAndUniforms.czm_cellular = czm_cellular;
         ShaderProgram._czmBuiltinsAndUniforms.czm_snoise = czm_snoise;
 
@@ -740,7 +751,9 @@ define('initialize',[
                 return (uniforms.lightWoodColor.alpha < 1.0) || (uniforms.darkWoodColor.alpha < 1.0);
             }
         });
-    }
+
+        initialized = true;
+    };
 
     return initialize;
 });
@@ -758,7 +771,24 @@ define('MaterialPack',[
 "use strict";
 /*jshint sub:true*/
 /*global define,require,self,Cesium*/
-
+/**
+ * @license
+ * Cellular noise ("Worley noise") in 2D in GLSL.
+ * Copyright (c) Stefan Gustavson 2011-04-19. All rights reserved.
+ * This code is released under the conditions of the MIT license.
+ * See LICENSE file for details.
+ */
+/**
+ * @license
+ * Description : Array and textureless GLSL 2D/3D/4D simplex 
+ *               noise functions.
+ *      Author : Ian McEwan, Ashima Arts.
+ *  Maintainer : ijm
+ *     Lastmod : 20110822 (ijm)
+ *     License : Copyright (C) 2011 Ashima Arts. All rights reserved.
+ *               Distributed under the MIT License. See LICENSE file.
+ *               https://github.com/ashima/webgl-noise
+ */
 define('Cesium/Core/Cartesian2', function() { return Cesium["Cartesian2"]; });
 define('Cesium/Core/Color', function() { return Cesium["Color"]; });
 define('Cesium/Renderer/ShaderProgram', function() { return Cesium["ShaderProgram"]; });

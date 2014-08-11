@@ -10,18 +10,18 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 
 | Name | Screenshot | Description |
 |:-----|:-----------|:------------|
-| `Asphalt` | <img src="Documentation/Images/Asphalt.PNG" width="200" height="92" /> | Asphalt generated with a combination of simplex and cellular noise. |
-| `Blob` | <img src="Documentation/Images/Blob.PNG" width="200" height="92" /> | Blob generated with cellular noise.  Resembles water, but clumped in a cell pattern. |
-| `Brick` | <img src="Documentation/Images/Brick.PNG" width="200" height="92" /> | Brick generated with a combination of a simple brick pattern and simplex noise for roughness. |
-| `Cement` | <img src="Documentation/Images/Cement.PNG" width="200" height="92" /> | Cement generated with simplex noise. |
-| `Erosion` | <img src="Documentation/Images/Erosion.png" width="200" height="92" /> | Animated erosion. |
-| `Facet` | <img src="Documentation/Images/Facet.PNG" width="200" height="92" /> | Facet generated with cellular noise. |
-| `Fresnel` | <img src="Documentation/Images/Fresnel.PNG" width="200" height="92" /> | A view-dependent combination of reflection and refraction.  Similar to water, when the viewer is looking straight down, the material refracts light; as the viewer looks more edge on, the material refracts less and reflects more. |
-| `Grass` | <img src="Documentation/Images/Grass.PNG" width="200" height="92" /> | Grass generated with simplex noise. |
-| `Reflection` | <img src="Documentation/Images/Reflection.PNG" width="200" height="92" /> | Cube map reflection for mirror-like surfaces that reflect light, e.g., paint on a car. |
-| `Refraction` | <img src="Documentation/Images/Refraction.PNG" width="200" height="92" /> | Cube map refraction for translucent surfaces that refract light, e.g., glass. |
-| `TieDye` | <img src="Documentation/Images/TieDye.PNG" width="200" height="92" /> | Tie-dye generated with simplex noise. |
-| `Wood` | <img src="Documentation/Images/Wood.PNG" width="200" height="92" /> | Wood generated with simplex noise. |
+| `Asphalt` | <img src="Documentation/Images/Asphalt.PNG"> | Asphalt generated with a combination of simplex and cellular noise. |
+| `Blob` | <img src="Documentation/Images/Blob.PNG"> | Blob generated with cellular noise.  Resembles water, but clumped in a cell pattern. |
+| `Brick` | <img src="Documentation/Images/Brick.PNG"> | Brick generated with a combination of a simple brick pattern and simplex noise for roughness. |
+| `Cement` | <img src="Documentation/Images/Cement.PNG"> | Cement generated with simplex noise. |
+| `Erosion` | <img src="Documentation/Images/Erosion.png"> | Animated erosion. |
+| `Facet` | <img src="Documentation/Images/Facet.PNG"> | Facet generated with cellular noise. |
+| `Fresnel` | <img src="Documentation/Images/Fresnel.PNG"> | A view-dependent combination of reflection and refraction.  Similar to water, when the viewer is looking straight down, the material refracts light; as the viewer looks more edge on, the material refracts less and reflects more. |
+| `Grass` | <img src="Documentation/Images/Grass.PNG"> | Grass generated with simplex noise. |
+| `Reflection` | <img src="Documentation/Images/Reflection.PNG"> | Cube map reflection for mirror-like surfaces that reflect light, e.g., paint on a car. |
+| `Refraction` | <img src="Documentation/Images/Refraction.PNG"> | Cube map refraction for translucent surfaces that refract light, e.g., glass. |
+| `TieDye` | <img src="Documentation/Images/TieDye.PNG"> | Tie-dye generated with simplex noise. |
+| `Wood` | <img src="Documentation/Images/Wood.PNG"> | Wood generated with simplex noise. |
 
 **Cesium version**: Tested against [1.0](http://cesiumjs.org/downloads.html). Most likely works with older and newer versions.  Post a message to the [Cesium forum](http://cesiumjs.org/forum.html) if you have compatibility issues.
 

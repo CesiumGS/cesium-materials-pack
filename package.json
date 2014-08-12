@@ -1,0 +1,18 @@
+{
+  "name": "cesium-materials-pack",
+  "version": "0.0.1",
+  "description": "A Cesium plugin with procedurally-shaded materials such as bricks, wood, and noise patterns.",
+  "homepage": "http://cesiumjs.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnalyticalGraphicsInc/cesium-materials-pack.git"
+  },
+  "devDependencies": {
+    "compression": "1.0.8",
+    "express": "4.4.4",
+    "request": "2.36.0",
+    "requirejs": "2.1.14",
+    "yargs": "1.2.6"
+  }
+}

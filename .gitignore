@@ -1,7 +1,3 @@
-/Source/MaterialPack.js
-
-/Source/Shaders/*.js
-/Source/Shaders/*/*.js
-/Source/Shaders/*/*/*.js
-
-/Build/minifyShaders.state
+node_modules/
+Source/main.js
+Build/MinifiedShaders/

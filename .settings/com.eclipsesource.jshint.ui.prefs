@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+excluded=ThirdParty//*\:Tools/build.js
+included=//*.js
+projectSpecificOptions=true

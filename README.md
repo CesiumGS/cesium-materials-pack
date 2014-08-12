@@ -32,9 +32,9 @@ Check out the [demo](http://analyticalgraphicsinc.github.io/cesium-materials-pac
 Prebuilt minified and unminified versions of the plugin are in the [Build](Build/) directory.  Include the `MaterialPack.js` file using a `script` tag after the `Cesium.js` `script` tag.
 
 ```html
-<script type="text/javascript" src="path/to/Cesium.js" />
-<script type="text/javascript" src="path/to/MaterialPack.js" />
-<script type="text/javascript">
+<script src="path/to/Cesium.js"></script>
+<script src="path/to/MaterialPack.js"></script>
+<script>
 // ...
 var primitives = scene.primitives;
 primitives.add(new Cesium.RectanglePrimitive({

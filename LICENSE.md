@@ -1,6 +1,6 @@
 This plugin was ported from core Cesium.
 
-Copyright 2011-2017 Analytical Graphics, Inc., and Contributors
+Copyright 2011-2017 Analytical Graphics, Inc. and Contributors
 
                                  Apache License
                            Version 2.0, January 2004
@@ -190,7 +190,7 @@ Copyright 2011-2017 Analytical Graphics, Inc., and Contributors
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright 2011-2017 Analytical Graphics, Inc., and Contributors
+   Copyright 2011-2017 Analytical Graphics, Inc. and Contributors
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
